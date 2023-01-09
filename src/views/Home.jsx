@@ -48,11 +48,11 @@ const Register = () => {
         </h1>
         <h2>{randomUser.birthdate}</h2>
         <h2>
-          {randomUser.city}, {randomUser.country}
+          {randomUser.city} {randomUser.country}
         </h2>
         <h2>{randomUser.email}</h2>
         <h2>{randomUser.phone}</h2>
-        <img src={randomUser.photo} alt="" srcset="" />
+        <img src={randomUser.photo} alt="user image" />
       </div>
     </div>
   );

@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../slices/userSlice";
 
 const Login = () => {
-  const [email, setEmail] = useState("owen.lopez@example.com");
-  const [password, setPassword] = useState("owen.lopez");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,20 +22,22 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err);
+        alert("Erreur de connexion");
       });
   };
 
   return (
     <div>
       <h1>Login</h1>
-      {/* <form
-        onSubmit={() => {
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
           handleSubmit();
         }}
       >
         <label htmlFor="email">Email</label>
         <input
-          type="email"
+          type="text"
           name="email"
           id="email"
           onChange={(e) => {
@@ -51,7 +53,7 @@ const Login = () => {
           }}
         />
         <button type="submit">Login</button>
-      </form> */}
+      </form>
       <button
         onClick={() => {
           handleSubmit();
