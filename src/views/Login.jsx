@@ -37,7 +37,8 @@ const Login = () => {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1 className="p-5 font-bold text-6xl">Connexion</h1>
+        <p className="divide-y-4"/>
       <form
         onSubmit={(e) => {
           e.preventDefault();
