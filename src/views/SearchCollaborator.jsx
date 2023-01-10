@@ -5,7 +5,10 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../slices/userSlice";
 import getRandomCollaborator, {
   getAllCollaborators,
+  deleteCollaborator,
 } from "../services/collaboratorsManagement";
+
+import ProfileCard from "../components/ProfileCard";
 
 const SearchCollaborator = () => {
   const navigate = useNavigate();
@@ -51,6 +54,9 @@ const SearchCollaborator = () => {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("user") === null) {
+      navigate("/login");
+    }
     getAllCollaborators()
       .then((res) => {
         setUsers(res.data);
@@ -105,17 +111,19 @@ const SearchCollaborator = () => {
       {users &&
         searchResults.map((user) => {
           return (
-            <div key={user.id}>
-              <h2>
-                {user.firstname} {user.lastname}
-              </h2>
-              <h2>{user.city}</h2>
-              <h3>{user.service}</h3>
-              <h3>{user.birthdate}</h3>
-              <h3>{user.email}</h3>
-              <h3>{user.phone}</h3>
-              <img src={user.photo} alt="" />
-            </div>
+            <ProfileCard
+              key={user.id}
+              randomUser={user}
+              deleteUser={() => {
+                deleteCollaborator(user.id)
+                  .then((res) => {
+                    console.log(res);
+                  })
+                  .catch((err) => {
+                    console.log(error);
+                  });
+              }}
+            />
           );
         })}
     </div>

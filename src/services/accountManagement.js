@@ -10,10 +10,12 @@ export async function changeProfile(payload, id) {
   const options = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Accept: "application/json",
     },
   };
   return await axios.put(
     `http://localhost:9000/api/collaborateurs/${id}`,
+    options,
     payload
   );
 }

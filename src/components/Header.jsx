@@ -7,7 +7,10 @@ import ProfilePopUp from "./ProfilePopUp";
 
 const Header = () => {
   const { user } = useSelector(selectUser);
-  const [showProfilePopUp, setShowProfilePopUp] = useState(false);
+  const [showProfilePopUp, setShowProfilePopUp] = useState({
+    show: false,
+    type: "",
+  });
   const navigate = useNavigate();
   return (
     <header>
@@ -20,11 +23,26 @@ const Header = () => {
           >
             Chercher un collaborateur
           </button>
+          {user.isAdmin && (
+            <button
+              onClick={() => {
+                setShowProfilePopUp({
+                  show: true,
+                  type: "Ajouter un profil",
+                });
+              }}
+            >
+              Ajouter un profil
+            </button>
+          )}
           <img
             src={user.photo}
             alt="user-image"
             onClick={() => {
-              setShowProfilePopUp(true);
+              setShowProfilePopUp({
+                show: true,
+                type: "Modifier mon profil",
+              });
             }}
           />
           <button
@@ -37,10 +55,10 @@ const Header = () => {
           >
             Disconnect
           </button>
-          {showProfilePopUp && (
+          {showProfilePopUp.show && (
             <ProfilePopUp
               setShowProfilePopUp={setShowProfilePopUp}
-              type="Modifier mon profil"
+              type={showProfilePopUp.type}
             />
           )}
         </>
