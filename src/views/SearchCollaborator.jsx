@@ -19,8 +19,10 @@ const SearchCollaborator = () => {
     setSearchTerm(e.target.value);
     console.log(searchTerm);
 
-    const results = users.filter((user) =>
-      user.firstname.toLowerCase().includes(searchTerm)
+    const results = users.filter(
+      (user) =>
+        user.firstname.toLowerCase().includes(searchTerm) ||
+        user.lastname.toLowerCase().includes(searchTerm)
     );
     setSearchResults(results);
 
@@ -39,17 +41,34 @@ const SearchCollaborator = () => {
 
   return (
     <div>
+      <header>
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Intranet
+        </button>
+      </header>
       <h1>Chercher un collaborateur</h1>
-      <input type="text" placeholder="Search" onChange={handleChange} />
+      <input
+        type="text"
+        placeholder="Search"
+        value={searchTerm === "" ? "" : searchTerm}
+        onChange={handleChange}
+      />
       {users &&
-        searchResults.map((user, id) => {
+        searchResults.map((user) => {
           return (
-            <div key={id}>
-              <h2>{user.firstname}</h2>
-              {/* <h3>{user.birthdate}</h3>
+            <div key={user.id}>
+              <h2>
+                {user.firstname} {user.lastname}
+              </h2>
+              <h3>{user.service}</h3>
+              <h3>{user.birthdate}</h3>
               <h3>{user.email}</h3>
               <h3>{user.phone}</h3>
-              <img src={user.photo} alt="" /> */}
+              <img src={user.photo} alt="" />
             </div>
           );
         })}
