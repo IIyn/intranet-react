@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../slices/userSlice";
 
@@ -6,9 +6,30 @@ import { changeProfile } from "../services/accountManagement";
 
 const UserInfosForm = (props) => {
   const { user } = useSelector(selectUser);
-  const [userInfo, setUserInfo] = useState(user);
+  const [userInfo, setUserInfo] =
+    props.type === "Modifier mon profil" ? useState(user) : useState({});
 
-  //   { name: " ", firstname: " ", telephone: ""}
+  const handleSubmit = () => {
+    const dataToSend = {
+      gender: userInfo.gender,
+      firstname: userInfo.firstname,
+      lastname: userInfo.lastname,
+      email: userInfo.email,
+      phone: userInfo.phone,
+      birthdate: userInfo.birthdate,
+      city: userInfo.city,
+      country: userInfo.country,
+      photo: userInfo.photo,
+      service: userInfo.service,
+    };
+    changeProfile({ dataToSend }, userInfo.id)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <form
@@ -18,19 +39,62 @@ const UserInfosForm = (props) => {
       }}
       onSubmit={(e) => {
         e.preventDefault();
+        handleSubmit();
       }}
     >
       <label htmlFor="gender">civilite</label>
       <select name="gender-select" id="" value={userInfo.gender}>
-        <option value="male">Homme</option>
-        <option value="female">Femme</option>
-        <option value="Other">Autre</option>
+        <option
+          value="male"
+          onChange={() => {
+            setUserInfo({ ...userInfo, gender: e.target.value });
+          }}
+        >
+          Homme
+        </option>
+        <option
+          value="female"
+          onChange={() => {
+            setUserInfo({ ...userInfo, gender: e.target.value });
+          }}
+        >
+          Femme
+        </option>
+        <option
+          value="other"
+          onChange={() => {
+            setUserInfo({ ...userInfo, gender: e.target.value });
+          }}
+        >
+          Autre
+        </option>
       </select>
       <label htmlFor="service">categorie</label>
-      <select name="service-select" id="" value={userInfo.gender}>
-        <option value="Technique">Technique</option>
-        <option value="Marketing">Marketing</option>
-        <option value="Client">Client</option>
+      <select name="service-select" id="" value={userInfo.service}>
+        <option
+          value="Technique"
+          onChange={() => {
+            setUserInfo({ ...userInfo, service: e.target.value });
+          }}
+        >
+          Technique
+        </option>
+        <option
+          value="Marketing"
+          onChange={() => {
+            setUserInfo({ ...userInfo, service: e.target.value });
+          }}
+        >
+          Marketing
+        </option>
+        <option
+          value="Client"
+          onChange={() => {
+            setUserInfo({ ...userInfo, service: e.target.value });
+          }}
+        >
+          Client
+        </option>
       </select>
       <label htmlFor="firstname">Prénom</label>
       <input

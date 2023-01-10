@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../slices/userSlice";
 import getRandomCollaborator from "../services/collaboratorsManagement";
-import { useEffect } from "react";
+
+import ProfileCard from "../components/ProfileCard";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,6 +13,12 @@ const Register = () => {
   const [randomUser, setRandomUser] = useState(null);
 
   const { user } = useSelector(selectUser);
+
+  useEffect(() => {
+    if (localStorage.getItem("user") === null) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <div className="home">
@@ -32,20 +39,7 @@ const Register = () => {
         </button>
       )}
 
-      {randomUser && (
-        <div>
-          <h1>
-            {randomUser.firstname} {randomUser.lastname}
-          </h1>
-          <h2>{randomUser.birthdate}</h2>
-          <h2>
-            {randomUser.city} {randomUser.country}
-          </h2>
-          <h2>{randomUser.email}</h2>
-          <h2>{randomUser.phone}</h2>
-          <img src={randomUser.photo} alt="user image" />
-        </div>
-      )}
+      {randomUser && <ProfileCard randomUser={randomUser} />}
     </div>
   );
 };
