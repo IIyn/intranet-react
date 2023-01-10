@@ -13,7 +13,7 @@ const SearchCollaborator = () => {
   const [users, setUsers] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("anything");
   const [searchByType, setSearchByType] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
