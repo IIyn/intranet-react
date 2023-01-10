@@ -9,12 +9,21 @@ import { useEffect } from "react";
 const Register = () => {
   const navigate = useNavigate();
 
-  const [randomUser, setRandomUser] = useState({});
+  const [randomUser, setRandomUser] = useState(null);
 
   const user = useSelector(selectUser);
 
   return (
     <div className="home">
+      <header>
+        <button
+          onClick={() => {
+            navigate("/search");
+          }}
+        >
+          Chercher un collaborateur
+        </button>
+      </header>
       <h1>Salut</h1>
       <h2>
         {user.user.firstname} {user.user.lastname}
@@ -42,18 +51,20 @@ const Register = () => {
         random user
       </button>
 
-      <div>
-        <h1>
-          {randomUser.firstname} {randomUser.lastname}
-        </h1>
-        <h2>{randomUser.birthdate}</h2>
-        <h2>
-          {randomUser.city} {randomUser.country}
-        </h2>
-        <h2>{randomUser.email}</h2>
-        <h2>{randomUser.phone}</h2>
-        <img src={randomUser.photo} alt="user image" />
-      </div>
+      {randomUser && (
+        <div>
+          <h1>
+            {randomUser.firstname} {randomUser.lastname}
+          </h1>
+          <h2>{randomUser.birthdate}</h2>
+          <h2>
+            {randomUser.city} {randomUser.country}
+          </h2>
+          <h2>{randomUser.email}</h2>
+          <h2>{randomUser.phone}</h2>
+          <img src={randomUser.photo} alt="user image" />
+        </div>
+      )}
     </div>
   );
 };

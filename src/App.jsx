@@ -6,6 +6,7 @@ import "./App.css";
 import Register from "./views/Register";
 import Login from "./views/Login";
 import Home from "./views/Home";
+import SearchCollaborator from "./views/SearchCollaborator";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchCollaborator />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
