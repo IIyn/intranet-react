@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import logIn from "../services/accountManagement";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../slices/userSlice";
 import { setUser } from "../slices/userSlice";
 
 const Login = () => {
@@ -10,13 +11,21 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const { user } = useSelector(selectUser);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, []);
 
   const handleSubmit = () => {
     logIn({ email, password })
       .then((res) => {
         console.log("RESPONSE OK ", res.data);
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         dispatch(setUser(res.data.user));
         navigate("/");
       })
@@ -54,13 +63,6 @@ const Login = () => {
         />
         <button type="submit">Login</button>
       </form>
-      <button
-        onClick={() => {
-          handleSubmit();
-        }}
-      >
-        Se connecter avec Lopez
-      </button>
     </div>
   );
 };

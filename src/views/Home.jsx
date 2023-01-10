@@ -11,45 +11,26 @@ const Register = () => {
 
   const [randomUser, setRandomUser] = useState(null);
 
-  const user = useSelector(selectUser);
+  const { user } = useSelector(selectUser);
 
   return (
     <div className="home">
-      <header>
+      {user && (
         <button
           onClick={() => {
-            navigate("/search");
+            getRandomCollaborator()
+              .then((res) => {
+                console.log("RESPONSE OK ", res.data);
+                setRandomUser(res.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           }}
         >
-          Chercher un collaborateur
+          random user
         </button>
-      </header>
-      <h1>Salut</h1>
-      <h2>
-        {user.user.firstname} {user.user.lastname}
-      </h2>
-      <button
-        onClick={() => {
-          navigate("/login");
-        }}
-      >
-        Login
-      </button>
-
-      <button
-        onClick={() => {
-          getRandomCollaborator()
-            .then((res) => {
-              console.log("RESPONSE OK ", res.data);
-              setRandomUser(res.data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }}
-      >
-        random user
-      </button>
+      )}
 
       {randomUser && (
         <div>
