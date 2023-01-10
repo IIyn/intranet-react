@@ -10,22 +10,43 @@ import getRandomCollaborator, {
 const SearchCollaborator = () => {
   const navigate = useNavigate();
 
-  const [users, setUsers] = useState(null);
+  const [users, setUsers] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [category, setCategory] = useState("");
+  const [searchByType, setSearchByType] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
+  const handleChange = (text) => {
+    setSearchTerm(text);
     console.log(searchTerm);
-
-    const results = users.filter(
-      (user) =>
-        user.firstname.toLowerCase().includes(searchTerm) ||
-        user.lastname.toLowerCase().includes(searchTerm)
-    );
+    let results = [];
+    switch (searchByType) {
+      case "name":
+        results = users.filter(
+          (user) =>
+            user.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.lastname.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        break;
+      case "city":
+        results = users.filter((user) =>
+          user.city.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        break;
+      default:
+        results = users.filter(
+          (user) =>
+            user.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.city.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        break;
+    }
+    if (category !== "anything") {
+      results = results.filter((user) => user.service === category);
+    }
     setSearchResults(results);
-
     console.log("results : ", results);
   };
 
@@ -55,8 +76,32 @@ const SearchCollaborator = () => {
         type="text"
         placeholder="Search"
         value={searchTerm === "" ? "" : searchTerm}
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e.target.value);
+        }}
       />
+      <select
+        name="type-selector"
+        onChange={(e) => {
+          setSearchByType(e.target.value);
+        }}
+        defaultValue="test"
+      >
+        <option value="anything">Tout</option>
+        <option value="name">Nom</option>
+        <option value="city">Ville</option>
+      </select>
+      <select
+        name="job-selector"
+        onChange={(e) => {
+          setCategory(e.target.value);
+        }}
+      >
+        <option value="anything">Aucun</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Client">Client</option>
+        <option value="Technique">Technique</option>
+      </select>
       {users &&
         searchResults.map((user) => {
           return (
@@ -64,6 +109,7 @@ const SearchCollaborator = () => {
               <h2>
                 {user.firstname} {user.lastname}
               </h2>
+              <h2>{user.city}</h2>
               <h3>{user.service}</h3>
               <h3>{user.birthdate}</h3>
               <h3>{user.email}</h3>
