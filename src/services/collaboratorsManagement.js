@@ -1,5 +1,4 @@
 import axios from "axios";
-// import contact from "./contact";
 
 export default async function getRandomCollaborator() {
   const options = {
