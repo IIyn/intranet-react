@@ -7,7 +7,11 @@ import { changeProfile } from "../services/accountManagement";
 const UserInfosForm = (props) => {
   const { user } = useSelector(selectUser);
   const [userInfo, setUserInfo] =
-    props.type === "Modifier mon profil" ? useState(user) : useState({});
+    props.type === "Modifier mon profil"
+      ? useState(user)
+      : props.type === "Editer"
+      ? useState(props.userToEdit)
+      : useState({});
 
   const handleSubmit = () => {
     const dataToSend = {

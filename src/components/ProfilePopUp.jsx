@@ -23,7 +23,7 @@ const ProfilePopUp = (props) => {
         X
       </button>
       <h1>{props.type}</h1>
-      <UserInfosForm type={props.type} />
+      <UserInfosForm type={props.type} userToEdit={props.userToEdit} />
     </div>
   );
 };

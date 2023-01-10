@@ -18,6 +18,14 @@ const Register = () => {
     if (localStorage.getItem("user") === null) {
       navigate("/login");
     }
+    getRandomCollaborator()
+      .then((res) => {
+        console.log("RESPONSE OK ", res.data);
+        setRandomUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
