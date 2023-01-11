@@ -38,7 +38,7 @@ const Header = () => {
                             Ajouter un profil
                         </button>
                     )}
-                    <img
+                    <img className=" w-12 h-12 rounded-full bg-cover"
                         src={user.photo}
                         alt="user-image"
                         onClick={() => {
@@ -48,16 +48,18 @@ const Header = () => {
                             });
                         }}
                     />
-                    <button
-                        onClick={() => {
-                            localStorage.removeItem("user");
-                            localStorage.removeItem("token");
-                            navigate("/login");
-                            window.location.reload();
-                        }}
-                    >
-                        Disconnect
-                    </button>
+                    <div className="p-1 px-7 bg-slate-200 text-red-500 hover:bg-rose-300 hover:text-white">
+                        <button className="mt-1 font-bold text-2xl"
+                                onClick={() => {
+                                    localStorage.removeItem("user");
+                                    localStorage.removeItem("token");
+                                    navigate("/login");
+                                    window.location.reload();
+                                }}
+                        >
+                            Déconnexion
+                        </button>
+                    </div>
                     {showProfilePopUp.show && (
                         <ProfilePopUp
                             setShowProfilePopUp={setShowProfilePopUp}
