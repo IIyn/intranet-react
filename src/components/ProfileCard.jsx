@@ -16,6 +16,7 @@ const ProfileCard = (props) => {
       <h1>
         {randomUser.firstname} {randomUser.lastname}
       </h1>
+      <h2>{randomUser.service}</h2>
       <h2>{randomUser.birthdate}</h2>
       <h2>
         {randomUser.city} {randomUser.country}

@@ -22,7 +22,7 @@ const SearchCollaborator = () => {
 
   const handleChange = (text) => {
     setSearchTerm(text);
-    console.log(searchTerm);
+    // console.log(searchTerm);
     let results = [];
     switch (searchByType) {
       case "name":
@@ -50,7 +50,7 @@ const SearchCollaborator = () => {
       results = results.filter((user) => user.service === category);
     }
     setSearchResults(results);
-    console.log("results : ", results);
+    // console.log("results : ", results);
   };
 
   useEffect(() => {
@@ -60,6 +60,7 @@ const SearchCollaborator = () => {
     getAllCollaborators()
       .then((res) => {
         setUsers(res.data);
+        setSearchResults(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -117,7 +118,7 @@ const SearchCollaborator = () => {
               deleteUser={() => {
                 deleteCollaborator(user.id)
                   .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                   })
                   .catch((err) => {
                     console.log(error);
