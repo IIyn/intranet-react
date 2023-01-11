@@ -19,45 +19,53 @@ const Header = () => {
             </div>
             {user ? (
                 <>
-                    <button
-                        onClick={() => {
-                            navigate("/search");
-                        }}
-                    >
-                        Chercher un collaborateur
-                    </button>
-                    {user.isAdmin && (
-                        <button
-                            onClick={() => {
-                                setShowProfilePopUp({
-                                    show: true,
-                                    type: "Ajouter un profil",
-                                });
-                            }}
+                    <div className="ml-10 mt-3 transition ease-in-out delay-300 hover:scale-150 duration-300">
+                        <button className="font-bold"
+                                onClick={() => {
+                                    navigate("/search");
+                                }}
                         >
-                            Ajouter un profil
+                            Chercher un collaborateur
                         </button>
+                    </div>
+                    {user.isAdmin && (
+                        <div className="ml-10 mt-3 transition ease-in-out delay-300 hover:scale-150 duration-300">
+                            <button className="font-bold"
+                                    onClick={() => {
+                                        setShowProfilePopUp({
+                                            show: true,
+                                            type: "Ajouter un profil",
+                                        });
+                                    }}
+                            >
+                                Ajouter un profil
+                            </button>
+                        </div>
                     )}
-                    <img
-                        src={user.photo}
-                        alt="user-image"
-                        onClick={() => {
-                            setShowProfilePopUp({
-                                show: true,
-                                type: "Modifier mon profil",
-                            });
-                        }}
-                    />
-                    <button
-                        onClick={() => {
-                            localStorage.removeItem("user");
-                            localStorage.removeItem("token");
-                            navigate("/login");
-                            window.location.reload();
-                        }}
-                    >
-                        Disconnect
-                    </button>
+                    <div className="flex flex-nowrap">
+                        <img className="mr-5 w-12 h-12 rounded-full bg-cover"
+                             src={user.photo}
+                             alt="user-image"
+                             onClick={() => {
+                                 setShowProfilePopUp({
+                                     show: true,
+                                     type: "Modifier mon profil",
+                                 });
+                             }}
+                        />
+                        <div className="p-1 px-7 bg-slate-200 text-red-500 hover:bg-rose-300 hover:text-white">
+                            <button className="mt-1 font-bold text-2xl"
+                                    onClick={() => {
+                                        localStorage.removeItem("user");
+                                        localStorage.removeItem("token");
+                                        navigate("/login");
+                                        window.location.reload();
+                                    }}
+                            >
+                                Déconnexion
+                            </button>
+                        </div>
+                    </div>
                     {showProfilePopUp.show && (
                         <ProfilePopUp
                             setShowProfilePopUp={setShowProfilePopUp}
