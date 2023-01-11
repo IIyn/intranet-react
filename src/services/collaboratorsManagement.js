@@ -21,17 +21,28 @@ export async function getAllCollaborators() {
   return await axios.get("http://localhost:9000/api/collaborateurs/", options);
 }
 
-export async function addCollaborator() {
+export async function getCollaboratorByID(id) {
   const options = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      Accept: "application/json",
+    },
+  };
+  return await axios.get(
+    `http://localhost:9000/api/collaborateurs/${id}`,
+    options
+  );
+}
+
+export async function addCollaborator(payload) {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   };
   return await axios.post(
-    `http://localhost:9000/api/collaborateurs/${id}`,
-    options,
-    payload
+    `http://localhost:9000/api/collaborateurs/`,
+    payload,
+    options
   );
 }
 
@@ -41,5 +52,8 @@ export async function deleteCollaborator(id) {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   };
-  await axios.delete(`http://localhost:9000/api/collaborateurs/${id}`, options);
+  return await axios.delete(
+    `http://localhost:9000/api/collaborateurs/${id}`,
+    options
+  );
 }

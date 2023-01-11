@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../slices/userSlice";
-import getRandomCollaborator from "../services/collaboratorsManagement";
+import getRandomCollaborator, {
+  deleteCollaborator,
+} from "../services/collaboratorsManagement";
 
 import ProfileCard from "../components/ProfileCard";
 
@@ -11,7 +13,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [randomUser, setRandomUser] = useState(null);
-
+  const [reload, setReload] = useState(false);
   const { user } = useSelector(selectUser);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const Register = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [reload]);
 
   return (
     <div className="home">
@@ -47,7 +49,22 @@ const Register = () => {
         </button>
       )}
 
-      {randomUser && <ProfileCard randomUser={randomUser} />}
+      {randomUser && (
+        <ProfileCard
+          randomUser={randomUser}
+          deleteUser={() => {
+            deleteCollaborator(randomUser.id)
+              .then((res) => {
+                // console.log(res);
+                setReload(!reload);
+                se;
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
+        />
+      )}
     </div>
   );
 };
