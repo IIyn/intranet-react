@@ -39,7 +39,6 @@ const Login = () => {
     <div>
       <div>
         <h1 className="p-5 font-bold text-6xl">Connexion</h1>
-        <div className="divide-y-4" />
         <p className="p-3">
           Pour vous connecter à l'intranet, entrez votre identifiant et mot de
           passe
