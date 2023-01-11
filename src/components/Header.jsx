@@ -13,7 +13,7 @@ const Header = () => {
   });
   const navigate = useNavigate();
   return (
-    <header>
+    <header className=" w-full bg-gradient-to-b from-red-400 via-red-500 to-pink-500">
       {user ? (
         <>
           <button
@@ -63,12 +63,12 @@ const Header = () => {
           )}
         </>
       ) : (
-        <button
+        <button className=""
           onClick={() => {
             navigate("/login");
           }}
         >
-          Login
+          Connexion
         </button>
       )}
     </header>
