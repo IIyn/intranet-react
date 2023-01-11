@@ -19,7 +19,7 @@ const Header = () => {
             </div>
             {user ? (
                 <>
-                    <div className="ml-10 mt-3">
+                    <div className="ml-10 mt-3 transition ease-in-out delay-300 hover:scale-150 duration-300">
                         <button className="font-bold"
                                 onClick={() => {
                                     navigate("/search");
@@ -29,16 +29,18 @@ const Header = () => {
                         </button>
                     </div>
                     {user.isAdmin && (
-                        <button
-                            onClick={() => {
-                                setShowProfilePopUp({
-                                    show: true,
-                                    type: "Ajouter un profil",
-                                });
-                            }}
-                        >
-                            Ajouter un profil
-                        </button>
+                        <div className="ml-10 mt-3 transition ease-in-out delay-300 hover:scale-150 duration-300">
+                            <button className="font-bold"
+                                    onClick={() => {
+                                        setShowProfilePopUp({
+                                            show: true,
+                                            type: "Ajouter un profil",
+                                        });
+                                    }}
+                            >
+                                Ajouter un profil
+                            </button>
+                        </div>
                     )}
                     <div className="flex flex-nowrap">
                         <img className="mr-5 w-12 h-12 rounded-full bg-cover"
