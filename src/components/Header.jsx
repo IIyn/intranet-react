@@ -43,7 +43,7 @@ const Header = () => {
                         </div>
                     )}
                     <div className="flex flex-nowrap">
-                        <img className="mr-5 w-12 h-12 rounded-full bg-cover"
+                        <img className="mr-5 w-12 h-12 rounded-full bg-cover cursor-pointer"
                              src={user.photo}
                              alt="user-image"
                              onClick={() => {
