@@ -20,6 +20,8 @@ const SearchCollaborator = () => {
   const [searchByType, setSearchByType] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+  const [reload, setReload] = useState(false);
+
   const handleChange = (text) => {
     setSearchTerm(text);
     // console.log(searchTerm);
@@ -65,7 +67,7 @@ const SearchCollaborator = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [reload]);
 
   return (
     <div>
@@ -91,6 +93,8 @@ const SearchCollaborator = () => {
         name="type-selector"
         onChange={(e) => {
           setSearchByType(e.target.value);
+          setSearchTerm("");
+          setReload(!reload);
         }}
         defaultValue="test"
       >
@@ -102,6 +106,8 @@ const SearchCollaborator = () => {
         name="job-selector"
         onChange={(e) => {
           setCategory(e.target.value);
+          setSearchTerm("");
+          setReload(!reload);
         }}
       >
         <option value="anything">Aucun</option>
@@ -119,6 +125,7 @@ const SearchCollaborator = () => {
                 deleteCollaborator(user.id)
                   .then((res) => {
                     // console.log(res);
+                    setReload(!reload);
                   })
                   .catch((err) => {
                     console.log(error);

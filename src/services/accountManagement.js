@@ -6,16 +6,15 @@ export default async function logIn(payload) {
 }
 
 export async function changeProfile(payload, id) {
-  // check if user id token is the same as the user we want to change
+  // TODO : check if user id token is the same as the user we want to change
   const options = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      Accept: "application/json",
     },
   };
   return await axios.put(
     `http://localhost:9000/api/collaborateurs/${id}`,
-    options,
-    payload
+    payload,
+    options
   );
 }
