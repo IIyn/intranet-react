@@ -12,7 +12,10 @@ const ProfileCard = (props) => {
     type: "",
   });
   return (
-    <div key={randomUser.id}>
+<div className="bg-white rounded-lg shadow-md pt-70 mb-30 mt-10 grid grid-cols-2 gap-1" >
+      <img class="flex items-center ..."src={randomUser.photo} alt="user image" />
+
+    <div key={randomUser.id}  >
       <h1>
         {randomUser.firstname} {randomUser.lastname}
       </h1>
@@ -23,14 +26,13 @@ const ProfileCard = (props) => {
       </h2>
       <h2>{randomUser.email}</h2>
       <h2>{randomUser.phone}</h2>
-      <img src={randomUser.photo} alt="user image" />
       {user.isAdmin && (
         <>
           <button
             onClick={() => {
               props.deleteUser(randomUser.id);
             }}
-          >
+            >
             Supprimer le compte
           </button>
           <button
@@ -40,18 +42,19 @@ const ProfileCard = (props) => {
                 type: "Editer",
               });
             }}
-          >
+            >
             Editer
           </button>
           {showProfilePopUp.show && (
             <ProfilePopUp
-              setShowProfilePopUp={setShowProfilePopUp}
-              type={showProfilePopUp.type}
-              userToEdit={randomUser}
+            setShowProfilePopUp={setShowProfilePopUp}
+            type={showProfilePopUp.type}
+            userToEdit={randomUser}
             />
-          )}
+            )}
         </>
       )}
+      </div>
     </div>
   );
 };
