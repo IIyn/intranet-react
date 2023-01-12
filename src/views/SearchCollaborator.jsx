@@ -71,15 +71,6 @@ const SearchCollaborator = () => {
 
   return (
     <div>
-      <header>
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          Intranet
-        </button>
-      </header>
       <h1>Chercher un collaborateur</h1>
       <div className="search flex justify-flex-start">
       <input
