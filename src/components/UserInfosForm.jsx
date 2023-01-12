@@ -114,8 +114,8 @@ const UserInfosForm = (props) => {
   };
 
   return (
-      <div className="flex justify-center w-72">
-          <form className="flex flex-col ml-5 text-black"
+      <div className="w-72">
+          <form className="flex flex-col items-center ml-5 text-black"
                 onSubmit={(e) => {
                     e.preventDefault();
                     handleSubmit();
