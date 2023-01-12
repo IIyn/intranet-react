@@ -14,9 +14,9 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <header className="flex justify-between w-full h-12 bg-gradient-to-b from-red-400 via-red-500 to-pink-500">
-      <div className="ml-10 mt-3 transition ease-in-out delay-300 hover:scale-150 duration-300">
+      <div className="ml-10 transition ease-in-out delay-300 hover:scale-150 duration-300">
         <button
-          className="p-1 pl-7"
+          className="p-1 pl-7 text-3xl font-bold"
           onClick={() => {
             navigate("/");
           }}
