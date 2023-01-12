@@ -50,7 +50,7 @@ const Register = () => {
       )}
 
       {randomUser && (
-        <ProfileCard
+        <ProfileCard 
           randomUser={randomUser}
           deleteUser={() => {
             deleteCollaborator(randomUser.id)
