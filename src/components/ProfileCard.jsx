@@ -12,15 +12,7 @@ const ProfileCard = (props) => {
     type: "",
   });
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexWrap: "wrap",
-        flexDirection: "row",
-        justifyContent: "center",
-      }}
-    >
+    <div className="flex items-center flex-wrap flex-row justify-center">
       <div class="flex flex-col  flex-wrap items-center bg-rose border rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-rose-500 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 mb-10">
         <img 
         style={{width: "14rem"}}
