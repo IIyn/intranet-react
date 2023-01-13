@@ -114,29 +114,37 @@ const UserInfosForm = (props) => {
   };
 
   return (
-      <div className="flex justify-center w-72">
-          <form className="flex flex-col ml-5 text-black"
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    handleSubmit();
-                }}
+    <div className="flex justify-center w-72">
+      <form
+        className="flex flex-col ml-5 text-black"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
+        <div className="flex flex-nowrap mb-2">
+          <label htmlFor="gender">Civilité</label>
+          <select
+            className="p-2 ml-2 rounded w-2/3"
+            name="gender-select"
+            id=""
+            value={userInfo.gender}
+            onChange={(e) => {
+              if (
+                e.target.value === "male" ||
+                e.target.value === "female" ||
+                e.target.value === "other"
+              ) {
+                setUserInfo({ ...userInfo, gender: e.target.value });
+                console.log(e.target.value);
+              }
+            }}
           >
-              <div className="flex flex-nowrap mb-2">
-                  <label htmlFor="gender">Civilité</label>
-                  <select className="p-2 ml-2 rounded w-2/3 text-white"
-                          name="gender-select"
-                          id=""
-                          value={userInfo.gender}
-                          onChange={(e) => {
-                              setUserInfo({ ...userInfo, gender: e.target.value });
-                              console.log(e.target.value);
-                          }}
-                  >
-                      <option value="male">Homme</option>
-                      <option value="female">Femme</option>
-                      <option value="other">Autre</option>
-                  </select>
-              </div>
+            <option value="male">Homme</option>
+            <option value="female">Femme</option>
+            <option value="other">Autre</option>
+          </select>
+        </div>
 
         <div className="flex flex-nowrap mb-2">
           <label htmlFor="service">Catégorie</label>
@@ -146,8 +154,14 @@ const UserInfosForm = (props) => {
             id=""
             value={userInfo.service}
             onChange={(e) => {
-              setUserInfo({ ...userInfo, service: e.target.value });
-              console.log(e.target.value);
+              if (
+                e.target.value === "Technique" ||
+                e.target.value === "Marketing" ||
+                e.target.value === "Client"
+              ) {
+                setUserInfo({ ...userInfo, service: e.target.value });
+                console.log(e.target.value);
+              }
             }}
           >
             <option value="Technique">Technique</option>
